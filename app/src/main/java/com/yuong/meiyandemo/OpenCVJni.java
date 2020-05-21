@@ -40,7 +40,7 @@ public class OpenCVJni {
     }
 
     public void stopTrack() {
-        native_startTrack(trackHandler);
+        native_stopTrack(trackHandler);
         mHandlerThread.quitSafely();
         mHandler = null;
     }

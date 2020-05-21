@@ -10,8 +10,9 @@ using namespace std;
 ANativeWindow *window = 0;
 
 extern "C"
-JNIEXPORT long JNICALL
-Java_com_yuong_meiyandemo_OpenCVJni_init(JNIEnv *env, jobject thiz, jstring path_, jstring seeta_) {
+JNIEXPORT jlong JNICALL
+Java_com_yuong_meiyandemo_OpenCVJni_init(JNIEnv *env, jobject instance, jstring path_,
+                                         jstring seeta_) {
     const char *path = env->GetStringUTFChars(path_, 0);
     const char *seeta = env->GetStringUTFChars(seeta_, 0);
     LOGW("path = %s", path);
