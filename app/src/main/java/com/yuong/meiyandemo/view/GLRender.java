@@ -104,11 +104,12 @@ public class GLRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameA
 //        mBigEyesFilter.onReady(width, height);
 //        mStickFilter.onReady(width, height);
         mScreenFilter.onReady(width, height);
-        if (openCVJni == null) {
+        if (openCVJni == null && lbpcascade_frontalface!=null && seeta_fa!=null) {
             openCVJni = new OpenCVJni(lbpcascade_frontalface.getAbsolutePath(), seeta_fa.getAbsolutePath(), mCameraHelper);
         }
         openCVJni.startTrack();
     }
+
 
     //摄像头获取一帧数据会回调该方法
     @Override
@@ -199,5 +200,9 @@ public class GLRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameA
                 }
             }
         });
+    }
+
+    public void stopTrack(){
+        openCVJni.stopTrack();
     }
 }

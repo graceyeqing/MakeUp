@@ -32,4 +32,7 @@ public class OpenGLView extends GLSurfaceView {
     public void enableBigEyes(boolean isChecked) {
         glRender.enableBigEyes(isChecked);
     }
+
+    public void stopTrack(){glRender.stopTrack();}
 }
+

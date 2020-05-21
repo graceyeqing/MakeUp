@@ -23,6 +23,11 @@ void FaceTrack::startTrack() {
     tracker->run();
 }
 
+void FaceTrack::stopTrack() {
+    //让检测器和跟踪器停止
+    tracker->stop();
+}
+
 vector<Rect2f> FaceTrack::detector(const Mat src) {
     vector<Rect> faces;//人脸集合
     vector<Rect2f> rects;

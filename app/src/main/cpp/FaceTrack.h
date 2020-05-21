@@ -53,6 +53,7 @@ public:
     FaceTrack(const char *path, const char *seeta);
 
     void startTrack();
+    void stopTrack();
 
     vector<Rect2f> detector(const Mat src);
 

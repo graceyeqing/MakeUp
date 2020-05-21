@@ -20,12 +20,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private CameraHelper2 mCameraHelper;
     int cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
     SurfaceView surfaceView;
+    private OpenGLView openGLView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         check();
         setContentView(R.layout.activity_main);
-        final OpenGLView openGLView = findViewById(R.id.OpenGLView);
+        openGLView = findViewById(R.id.OpenGLView);
         CheckBox beauty = findViewById(R.id.beauty);
         beauty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -71,6 +72,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        openGLView.stopTrack();
+        openGLView = null;
     }
 
     @Override

@@ -22,7 +22,9 @@ Java_com_yuong_meiyandemo_OpenCVJni_init(JNIEnv *env, jobject thiz, jstring path
     env->ReleaseStringUTFChars(path_, path);
     env->ReleaseStringUTFChars(seeta_, seeta);
     return reinterpret_cast<long>(faceTrack);
-}extern "C"
+}
+
+extern "C"
 JNIEXPORT void JNICALL
 Java_com_yuong_meiyandemo_OpenCVJni_native_1startTrack(JNIEnv *env, jobject thiz,
                                                        jlong track_handler) {
@@ -31,7 +33,9 @@ Java_com_yuong_meiyandemo_OpenCVJni_native_1startTrack(JNIEnv *env, jobject thiz
     }
     FaceTrack *faceTrack = reinterpret_cast<FaceTrack *>(track_handler);
     faceTrack->startTrack();
-}extern "C"
+}
+
+extern "C"
 JNIEXPORT jobject JNICALL
 Java_com_yuong_meiyandemo_OpenCVJni_native_1detector(JNIEnv *env, jobject thiz, jlong track_handler,
                                                      jbyteArray data, jint w, jint h,
@@ -97,4 +101,17 @@ Java_com_yuong_meiyandemo_OpenCVJni_native_1detector(JNIEnv *env, jobject thiz, 
 
     env-> ReleaseByteArrayElements(data, data_, 0);
     return face;
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_yuong_meiyandemo_OpenCVJni_native_1stopTrack(JNIEnv *env, jobject instance,
+                                                      jlong trackHandler) {
+
+    if (trackHandler == 0) {
+        return;
+    }
+    FaceTrack *faceTrack = reinterpret_cast<FaceTrack *>(trackHandler);
+    faceTrack->stopTrack();
+
 }

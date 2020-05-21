@@ -39,14 +39,22 @@ public class OpenCVJni {
         native_startTrack(trackHandler);
     }
 
+    public void stopTrack() {
+        native_startTrack(trackHandler);
+        mHandlerThread.quitSafely();
+        mHandler = null;
+    }
+
 
     //先检测人脸，再检测人眼  由于比较耗时，要开启线程进行检测
     public void detector(byte[] data) {
         //先把之前的消息移除
-        mHandler.removeMessages(CHECK_FACE);
-        Message message = mHandler.obtainMessage(CHECK_FACE);
-        message.obj = data;
-        mHandler.sendMessage(message);
+        if(mHandler != null){
+            mHandler.removeMessages(CHECK_FACE);
+            Message message = mHandler.obtainMessage(CHECK_FACE);
+            message.obj = data;
+            mHandler.sendMessage(message);
+        }
     }
 
     public Face getFace() {
@@ -58,6 +66,9 @@ public class OpenCVJni {
 
     //开启检测
     private native void native_startTrack(long trackHandler);
+
+    //结束检测
+    private native void native_stopTrack(long trackHandler);
 
     //检测人脸、人眼
     private native Face native_detector(long trackHandler, byte[] data, int width, int height, int cameraId);
